@@ -24,6 +24,7 @@ const getTask = async (req,res)=>{
     try{
         const {id:task_id}=req.params;
         const task = await Task.findOne({_id:task_id})
+        // const task = await Task.findById(task_id)
         if (!task){
             return res.status(404).json({msg:'please verify your id'})
         }
@@ -53,6 +54,7 @@ const updateTask = async (req,res)=>{
     try{
         const {id:task_id}  = req.params
         const task  = await Task.findOneAndUpdate({_id:task_id},req.body,{new:true,runValidators:true})
+        // const task  = await Task.findByIdAndUpdate(task_id,req.body,{new:true,runValidators:true})
         if (!task){
             return res.status(404).json({msg:'please verify your id'})
         }
