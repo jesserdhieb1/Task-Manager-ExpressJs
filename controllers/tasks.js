@@ -34,14 +34,11 @@ const getTask = async (req,res)=>{
     }
 }
 
-const updateTask = (req,res)=>{
-    res.status(200).send('update a task :)');
-}
-
 const deleteTask = async (req,res)=>{
     try{
         const {id:task_id}=req.params
         const task = await Task.findOneAndDelete({_id:task_id})
+        // const task = await Task.findByIdAndDelete(task_id)
         if (!task){
             return res.status(404).json({msg:'please verify your id'})
         }
@@ -50,6 +47,10 @@ const deleteTask = async (req,res)=>{
     catch (error){
         res.status(500).json({msg:error})
     }
+}
+
+const updateTask = (req,res)=>{
+    res.status(200).send('update a task :)');
 }
 
 module.exports={
