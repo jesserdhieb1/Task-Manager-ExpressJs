@@ -7,10 +7,9 @@ require('dotenv').config()
 
 //middleware that is helping us for getting json data
 app.use(express.json())
+//middleware responsible for providing static data to the browser
+app.use(express.static('./public'))
 
-app.get('/',(req,res)=>{
-    res.status(200).send('Hello :)')
-})
 
 app.use('/api/v1/tasks',tasks)
 
