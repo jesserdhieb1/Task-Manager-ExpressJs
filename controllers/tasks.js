@@ -2,8 +2,8 @@ const Task = require('../models/task')
 
 const getAllTasks = async (req,res)=>{
     try {
-        const task = await Task.get({});
-        res.status(200).send('get all tasks :)');
+        const task = await Task.find({});
+        res.status(200).send({task});
     }
     catch (error){
         res.status(500).json({msg:error})
@@ -23,7 +23,8 @@ const createTask = async (req,res)=>{
 const getTask = async (req,res)=>{
     try{
         const {id:task_id}=req.params;
-        const task = await Task.findOne({id:task_id})
+        const task = await Task.findOne({_id:task_id})
+        console.log(task)
         if (!task){
             return res.status(404).json({msg:'please verify your id'})
         }
