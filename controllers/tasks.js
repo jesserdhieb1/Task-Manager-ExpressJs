@@ -49,8 +49,18 @@ const deleteTask = async (req,res)=>{
     }
 }
 
-const updateTask = (req,res)=>{
-    res.status(200).send('update a task :)');
+const updateTask = async (req,res)=>{
+    try{
+        const {id:task_id}  = req.params
+        const task  = await Task.findOneAndUpdate({_id:task_id},req.body,{new:true,runValidators:true})
+        if (!task){
+            return res.status(404).json({msg:'please verify your id'})
+        }
+        res.status(200).json({task})
+    }
+    catch (error){
+        res.status(500).json({msg:error})
+    }
 }
 
 module.exports={
