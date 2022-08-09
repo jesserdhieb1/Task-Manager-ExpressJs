@@ -24,7 +24,6 @@ const getTask = async (req,res)=>{
     try{
         const {id:task_id}=req.params;
         const task = await Task.findOne({_id:task_id})
-        console.log(task)
         if (!task){
             return res.status(404).json({msg:'please verify your id'})
         }
@@ -39,8 +38,18 @@ const updateTask = (req,res)=>{
     res.status(200).send('update a task :)');
 }
 
-const deleteTask = (req,res)=>{
-    res.status(200).send('delete a task :)');
+const deleteTask = async (req,res)=>{
+    try{
+        const {id:task_id}=req.params
+        const task = await Task.findOneAndDelete({_id:task_id})
+        if (!task){
+            return res.status(404).json({msg:'please verify your id'})
+        }
+        res.status(200).json({task})
+    }
+    catch (error){
+        res.status(500).json({msg:error})
+    }
 }
 
 module.exports={
