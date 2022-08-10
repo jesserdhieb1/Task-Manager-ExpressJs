@@ -19,6 +19,7 @@ const getTask =asyncWrapper( async (req,res)=>{
             return res.status(404).json({msg:'please verify your id'})
         }
         res.status(200).json({task})
+
 })
 
 const deleteTask =asyncWrapper( async (req,res)=>{
